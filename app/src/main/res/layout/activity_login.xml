@@ -46,7 +46,7 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editUsername"
+        android:id="@+id/Username"
         android:layout_width="270dp"
         android:layout_height="40dp"
         android:layout_marginLeft="45dp"
@@ -70,14 +70,14 @@
         android:textSize="18sp" />
 
     <EditText
-        android:id="@+id/editPassword"
+        android:id="@+id/Password"
         android:layout_width="270dp"
         android:layout_height="40dp"
-        android:background="@drawable/background"
-        android:layout_marginTop="390dp"
         android:layout_marginLeft="45dp"
-        android:inputType="textPassword"
+        android:layout_marginTop="390dp"
+        android:background="@drawable/background"
         android:hint=" Masukkan Password Anda"
+        android:inputType="textPassword"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="16sp" />
@@ -109,7 +109,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="530dp"
-        android:layout_marginLeft="210dp"
+        android:layout_marginLeft="190dp"
         android:text="Daftar Sekarang"
         android:clickable="true"
         android:textStyle="bold"

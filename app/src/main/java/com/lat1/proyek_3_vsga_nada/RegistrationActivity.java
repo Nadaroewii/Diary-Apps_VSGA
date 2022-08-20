@@ -1,8 +1,10 @@
 package com.lat1.proyek_3_vsga_nada;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,8 +16,8 @@ import java.io.File;
 import java.io.FileOutputStream;
 
 public class RegistrationActivity extends AppCompatActivity {
-    EditText editUsername, editPassword, editEmail, editNamaLengkap, editAsalSekolah, editAlamat;
-    Button btnSimpan;
+    EditText Username, Password, Email, NamaLengkap, AsalSekolah, Alamat;
+    Button Simpan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,37 +26,37 @@ public class RegistrationActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle("Register");
-        editUsername = findViewById(R.id.editUsername);
-        editPassword = findViewById(R.id.editPassword);
-        editEmail = findViewById(R.id.editEmail);
-        editNamaLengkap = findViewById(R.id.editNamaLengkap);
-        editAsalSekolah = findViewById(R.id.editAsalSekolah);
-        editAlamat = findViewById(R.id.editAlamat);
-        btnSimpan = findViewById(R.id.btnSimpan);
-        btnSimpan.setOnClickListener(new View.OnClickListener() {
+        Username = findViewById(R.id.Username);
+        Password = findViewById(R.id.Password);
+        Email = findViewById(R.id.Email);
+        NamaLengkap = findViewById(R.id.NamaLengkap);
+        AsalSekolah = findViewById(R.id.AsalSekolah);
+        Alamat = findViewById(R.id.Alamat);
+        Simpan = findViewById(R.id.Simpan);
+        Simpan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (isValidation()) {
-                    simpanFileData();
+                    tampilkanKonfirmasiRegister();
                 } else {
-                    Toast.makeText(RegistrationActivity.this, "Mohon Lengkapi Seluruh Data", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(RegistrationActivity.this, "Mohon Lengkapi Seluruh Data!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
     }
 
     boolean isValidation() {
-        if (editUsername.getText().toString().equals("") ||
-                editPassword.getText().toString().equals("") || editEmail.getText().toString().equals("") || editNamaLengkap.getText().toString().equals("") || editAsalSekolah.getText().toString().equals("") || editAlamat.getText().toString().equals("")) {
+        if (Username.getText().toString().equals("") ||
+                Password.getText().toString().equals("") || Email.getText().toString().equals("") || NamaLengkap.getText().toString().equals("") || AsalSekolah.getText().toString().equals("") || Alamat.getText().toString().equals("")) {
             return false;
         } else {
             return true;
         }
     }
 
-    void simpanFileData() {
-        String isiFile = editUsername.getText().toString() + ";" + editPassword.getText().toString() + ";" + editEmail.getText().toString() + ";" + editNamaLengkap.getText().toString() + ";" + editAsalSekolah.getText().toString() + ";" + editAlamat.getText().toString();
-        File file = new File(getFilesDir(), editUsername.getText().toString());
+    void simpanData() {
+        String isiFile = Username.getText().toString() + ";" + Password.getText().toString() + ";" + Email.getText().toString() + ";" + NamaLengkap.getText().toString() + ";" + AsalSekolah.getText().toString() + ";" + Alamat.getText().toString();
+        File file = new File(getFilesDir(), Username.getText().toString());
         FileOutputStream outputStream = null;
         try {
             file.createNewFile();
@@ -68,15 +70,27 @@ public class RegistrationActivity extends AppCompatActivity {
         Toast.makeText(this, "Register Berhasil", Toast.LENGTH_SHORT).show();
         onBackPressed();
     }
+    void tampilkanKonfirmasiRegister() {
+        new AlertDialog.Builder(this).setTitle("Registrasi")
+                .setMessage("Apakah Anda yakin Data telah sesuai?")
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        simpanData();
 
+                    }
+                }).setNegativeButton(android.R.string.no, null).show();
+    }
     @Override
     public void onBackPressed() {
+       // tampilkanKonfirmasiRegister();
         super.onBackPressed();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
+
             onBackPressed();
         }
         return super.onOptionsItemSelected(item);

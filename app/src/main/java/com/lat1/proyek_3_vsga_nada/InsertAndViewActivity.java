@@ -28,7 +28,7 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
 
     public static final int REQUEST_CODE_STORAGE = 100;
     int eventID = 0;
-    EditText edtFileName, edtContent;
+    EditText FileName, Content;
     Button btnSimpan;
     boolean isEditable = false;
     String fileName = "";
@@ -42,22 +42,22 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        edtFileName = findViewById(R.id.editFilename);
-        edtContent = findViewById(R.id.editContent);
+        FileName = findViewById(R.id.editFilename);
+        Content = findViewById(R.id.editContent);
         btnSimpan = findViewById(R.id.btnSimpan);
         btnSimpan.setOnClickListener(this);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             fileName = extras.getString("filename");
-            edtFileName.setText(fileName);
+            FileName.setText(fileName);
             getSupportActionBar().setTitle("Ubah Catatan");
         } else {
             getSupportActionBar().setTitle("Tambah Catatan");
         }
         eventID = 1;
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (periksaIzinPenyimpanan()) {
+        if (Build.VERSION.SDK_INT >= 30) {
+            if (periksaIzin()) {
                 bacaFile();
             }
         } else {
@@ -70,21 +70,21 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
         switch (v.getId()) {
             case R.id.btnSimpan:
                 eventID = 2;
-                if (!tempCatatan.equals(edtContent.getText().toString())) {
-                    if (Build.VERSION.SDK_INT >= 23) {
-                        if (periksaIzinPenyimpanan()) {
-                            tampilkanDialogKonfirmasiPenyimpanan();
+                if (!tempCatatan.equals(Content.getText().toString())) {
+                    if (Build.VERSION.SDK_INT >= 30) {
+                        if (periksaIzin()) {
+                            tampilkanKonfirmasiPenyimpanan();
                         }
                     } else {
-                        tampilkanDialogKonfirmasiPenyimpanan();
+                        tampilkanKonfirmasiPenyimpanan();
                     }
                 }
                 break;
         }
     }
 
-    public boolean periksaIzinPenyimpanan() {
-        if (Build.VERSION.SDK_INT >= 23) {
+    public boolean periksaIzin() {
+        if (Build.VERSION.SDK_INT >= 30) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
@@ -105,7 +105,7 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
                     if (eventID == 1) {
                         bacaFile();
                     } else {
-                        tampilkanDialogKonfirmasiPenyimpanan();
+                        tampilkanKonfirmasiPenyimpanan();
                     }
                 }
                 break;
@@ -114,7 +114,7 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
 
     void bacaFile() {
         String path = Environment.getExternalStorageDirectory().toString() + Constants.direktoriFile;
-        File file = new File(path, edtFileName.getText().toString());
+        File file = new File(path, FileName.getText().toString());
         if (file.exists()) {
             StringBuilder text = new StringBuilder();
             try {
@@ -129,7 +129,7 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
                 System.out.println("Error " + e.getMessage());
             }
             tempCatatan = text.toString();
-            edtContent.setText(text.toString());
+            Content.setText(text.toString());
         }
     }
 
@@ -143,14 +143,14 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
         if (parent.exists()) {
 
             File file = new File(path,
-                    edtFileName.getText().toString());
+                    FileName.getText().toString());
             FileOutputStream outputStream = null;
 
             try {
                 file.createNewFile();
                 outputStream = new FileOutputStream(file);
                 OutputStreamWriter streamWriter = new OutputStreamWriter(outputStream);
-                streamWriter.append(edtContent.getText());
+                streamWriter.append(Content.getText());
                 streamWriter.flush();
                 streamWriter.close();
                 outputStream.flush();
@@ -160,12 +160,12 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
             }
         } else {
             parent.mkdir();
-            File file = new File(path, edtFileName.getText().toString());
+            File file = new File(path, FileName.getText().toString());
             FileOutputStream outputStream = null;
             try {
                 file.createNewFile();
                 outputStream = new FileOutputStream(file, false);
-                outputStream.write(edtContent.getText().toString().getBytes());
+                outputStream.write(Content.getText().toString().getBytes());
                 outputStream.flush();
                 outputStream.close();
             } catch (Exception e) {
@@ -176,7 +176,7 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
 //        onBackPressed();
     }
 
-    void tampilkanDialogKonfirmasiPenyimpanan() {
+    void tampilkanKonfirmasiPenyimpanan() {
         new AlertDialog.Builder(this).setTitle("Simpan Catatan")
                 .setMessage("Apakah Anda yakin menyimpan Catatan ini?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -190,16 +190,19 @@ public class InsertAndViewActivity extends AppCompatActivity implements View.OnC
 
     @Override
     public void onBackPressed() {
-        if (!tempCatatan.equals(edtContent.getText().toString())) {
-            tampilkanDialogKonfirmasiPenyimpanan();
-        }
+       // if (!tempCatatan.equals(Content.getText().toString())) {
+           // tampilkanKonfirmasiPenyimpanan();
+        //}
         super.onBackPressed();
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
-            onBackPressed();
+            if (!tempCatatan.equals(Content.getText().toString())) {
+                tampilkanKonfirmasiPenyimpanan();
+                
+            }
         }
         return super.onOptionsItemSelected(item);
     }

@@ -20,8 +20,8 @@ import java.io.IOException;
 public class LoginActivity extends AppCompatActivity {
     public static final String FILENAME = "login";
 
-    Button btnLogin;
-    TextView btnRegister;
+    Button Login;
+    TextView Register;
     EditText editUserName, editPassword;
 
     @Override
@@ -29,20 +29,20 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        editUserName = findViewById(R.id.editUsername);
-        editPassword = findViewById(R.id.editPassword);
+        editUserName = findViewById(R.id.Username);
+        editPassword = findViewById(R.id.Password);
 
-        btnLogin = findViewById(R.id.action_login);
-        btnRegister = findViewById(R.id.action_register);
+        Login = findViewById(R.id.action_login);
+        Register = findViewById(R.id.action_register);
 
-        btnLogin.setOnClickListener(new View.OnClickListener() {
+        Login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                login();
+                    login();
             }
         });
 
-        btnRegister.setOnClickListener(new View.OnClickListener() {
+        Register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(LoginActivity.this, RegistrationActivity.class);
@@ -51,7 +51,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    void simpanFileLogin() {
+    void simpanLogin() {
         String isiFile = editUserName.getText().toString() + ";" + editPassword.getText().toString();
         File file = new File(getFilesDir(), FILENAME);
         FileOutputStream outputStream = null;
@@ -89,7 +89,7 @@ public class LoginActivity extends AppCompatActivity {
             String[] dataUser = data.split(";");
 
             if (dataUser[1].equals(editPassword.getText().toString())) {
-                simpanFileLogin();
+                simpanLogin();
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
             } else {

@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().setTitle("Aplikasi Catatan Proyek");
+        getSupportActionBar().setTitle("Proyek 2 : Aplikasi Catatan");
         listView = findViewById(R.id.listView);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -55,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id) {
                 Map<String, Object> data = (Map<String, Object>) parent.getAdapter().getItem(position);
-                tampilkanDialogKonfirmasiHapusCatatan(data.get("name").toString());
+                tampilkanKonfirmasiHapus(data.get("name").toString());
                 return true;
             }
         });
@@ -64,17 +64,17 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        if (Build.VERSION.SDK_INT >= 23) {
-            if (periksaIzinPenyimpanan()) {
-                mengambilListFilePadaFolder();
+        if (Build.VERSION.SDK_INT >= 30) {
+            if (periksaIzin()) {
+                mengambilListFile();
             }
         } else {
-            mengambilListFilePadaFolder();
+            mengambilListFile();
         }
     }
 
-    public boolean periksaIzinPenyimpanan() {
-        if (Build.VERSION.SDK_INT >= 23) {
+    public boolean periksaIzin() {
+        if (Build.VERSION.SDK_INT >= 30) {
             if (checkSelfPermission(android.Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 return true;
             } else {
@@ -92,13 +92,13 @@ public class MainActivity extends AppCompatActivity {
         switch (requestCode) {
             case REQUEST_CODE_STORAGE:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    mengambilListFilePadaFolder();
+                    mengambilListFile();
                 }
                 break;
         }
     }
 
-    void mengambilListFilePadaFolder() {
+    void mengambilListFile() {
         String path = Environment.getExternalStorageDirectory().toString() + Constants.direktoriFile;
         File directory = new File(path);
         if (directory.exists()) {
@@ -139,14 +139,14 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
                 break;
             case R.id.action_logout:
-                tampilkanDialogKonfirmasiLogout();
+                tampilkanKonfirmasiLogout();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
 
-    void tampilkanDialogKonfirmasiHapusCatatan(final String filename) {
+    void tampilkanKonfirmasiHapus(final String filename) {
         new AlertDialog.Builder(this).setTitle("Hapus Catatan ini?")
                 .setMessage("Apakah Anda yakin ingin menghapus Catatan " + filename + "?")
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         if (file.exists()) {
             file.delete();
         }
-        mengambilListFilePadaFolder();
+        mengambilListFile();
     }
 
     void hapusFile() {
@@ -173,7 +173,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    void tampilkanDialogKonfirmasiLogout() {
+    void tampilkanKonfirmasiLogout() {
         new AlertDialog.Builder(this).setTitle("Logout")
                 .setMessage("Apakah Anda yakin ingin Logout?")
                 .setIcon(android.R.drawable.ic_dialog_alert)

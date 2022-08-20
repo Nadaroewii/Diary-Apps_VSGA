@@ -25,7 +25,7 @@
                 android:background="@color/white" />
 
             <Button
-                android:id="@+id/btnSimpan"
+                android:id="@+id/Simpan"
                 android:layout_width="200dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="80dp"
@@ -39,7 +39,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/editUsername"
+                android:id="@+id/Username"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
@@ -48,12 +48,12 @@
                 android:hint="Masukkan Username Anda"
                 android:inputType="textFilter"
                 android:textColor="@color/black"
-                android:textSize="16sp"
                 android:textColorHint="@color/black"
+                android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/editPassword"
+                android:id="@+id/Password"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
@@ -61,12 +61,12 @@
                 android:hint="Masukkan Password Anda"
                 android:inputType="textPassword"
                 android:textColor="@color/black"
-                android:textSize="16sp"
                 android:textColorHint="@color/black"
+                android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/editEmail"
+                android:id="@+id/Email"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
@@ -74,12 +74,12 @@
                 android:hint="Masukkan Email Anda"
                 android:inputType="textEmailAddress"
                 android:textColor="@color/black"
-                android:textSize="16sp"
                 android:textColorHint="@color/black"
+                android:textSize="16sp"
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/editNamaLengkap"
+                android:id="@+id/NamaLengkap"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
@@ -91,7 +91,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/editAsalSekolah"
+                android:id="@+id/AsalSekolah"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
@@ -103,7 +103,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <EditText
-                android:id="@+id/editAlamat"
+                android:id="@+id/Alamat"
                 android:layout_width="280dp"
                 android:layout_height="40dp"
                 android:layout_marginLeft="30dp"
