@@ -1,2 +1,2 @@
-#Proyek-ke-3-VSGA
-Proyek-2 Aplikasi VSGA : Aplikasi Catatan Harian
+# Notes
+Merupakan proyek ke 3 dari program VSGA, dan proyek ke 2 untuk aplikasi android dengan judul "aplikasi catatan harian"
