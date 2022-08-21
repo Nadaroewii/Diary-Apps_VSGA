@@ -104,18 +104,19 @@
         android:textColor="#000"
         android:color="@color/black"
         android:textSize="16sp" />
+
     <TextView
         android:id="@+id/action_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="530dp"
         android:layout_marginLeft="190dp"
-        android:text="Daftar Sekarang"
+        android:layout_marginTop="530dp"
         android:clickable="true"
-        android:textStyle="bold"
-        android:textColor="#000"
         android:color="@color/black"
-        android:textSize="16sp" />
+        android:text="Daftar Sekarang"
+        android:textColor="#000"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
 <!--    <Button-->
 <!--        android:id="@+id/action_register"-->
