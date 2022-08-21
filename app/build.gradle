@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    compileSdk 30
+    compileSdk 31
 
     defaultConfig {
         configurations.all {
@@ -11,13 +11,13 @@ android {
         }
         applicationId "com.lat1.proyek_3_vsga_nada"
         minSdk 24
-        targetSdk 30
+        targetSdk 31
         versionCode 1
         versionName "1.0"
         multiDexEnabled true
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        targetSdkVersion 30
+        targetSdkVersion 31
     }
 
     buildTypes {
