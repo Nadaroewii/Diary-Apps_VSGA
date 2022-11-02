@@ -11,3 +11,8 @@ The details of this apps:
 
 <b> Demo of Diary-Apps </b> 
 
+<b> 1. Login and Register Page </b>
+
+![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/89477206/199441714-2b705405-8627-417b-9ab4-48a66a56fc6b.gif)
+
+<b> 2. Home Page of Diary Applications </b>
