@@ -16,3 +16,5 @@ The details of this apps:
 ![ezgif com-gif-maker (4)](https://user-images.githubusercontent.com/89477206/199441714-2b705405-8627-417b-9ab4-48a66a56fc6b.gif)
 
 <b> 2. Home Page of Diary Applications </b>
+
+![ezgif com-gif-maker (5)](https://user-images.githubusercontent.com/89477206/199442302-893ae24a-14de-469b-b50e-21624e7f6024.gif)
